@@ -1,10 +1,10 @@
 import {Request}          from 'express'
-import {Response}         from 'express'
-import {StatusCodes}      from 'http-status-codes'
+import {Response}         from 'express';
+import {StatusCodes}      from 'http-status-codes';
 import {BaseController}   from '../BaseController'
-import {Task}             from '../../src/entities/Task'
-import {TaskService}      from '../../src/services/TaskService'
-import {TaskMongoStorage} from '../../mongo-storages/TaskMongoStorage'
+import {Task}             from '../../src/entities/Task';
+import {TaskService}      from '../../src/services/TaskService';
+import {TaskMongoStorage} from '../../mongo-storages/TaskMongoStorage';
 
 export class CreateTaskController extends BaseController {
     public async execute(request: Request, response: Response): Promise<Response> {
@@ -31,7 +31,7 @@ export class CreateTaskController extends BaseController {
             assignee:    task.assignee,
             due_date:    task.dueDate,
             status:      task.status,
-            historic:    task.historic,
+            historic:    task.historic
         })
     }
 }

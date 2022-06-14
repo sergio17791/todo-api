@@ -1,5 +1,6 @@
 
 import chai          from 'chai'
+import mongoose      from 'mongoose'
 import request       from 'supertest'
 import {StatusCodes} from 'http-status-codes'
 import app           from '../../app'
@@ -85,6 +86,11 @@ describe('Create Task e2e tests', () => {
     })
 
     context('when all parameters are correct', () => {
+
+        afterEach(async () => {
+            await mongoose.model('Task').deleteMany()
+        })
+
         it('should return a task', async () => {
             const response = await request(app)
                 .post('/task')

@@ -1,8 +1,9 @@
-import {CreateTaskDTO} from '../dtos/tasks/CreateTaskDTO'
-import {Task}          from '../entities/Task'
+import {CreateTaskDTO}  from '../dtos/tasks/CreateTaskDTO'
+import {ListTasksDTO}    from '../dtos/tasks/ListTasksDTO'
+import {Task}           from '../entities/Task'
 import { TaskHistoric } from '../entities/TaskHistoric'
-import {ITaskStorage}  from '../storages/ITaskStorage'
-import {TaskStatus}    from '../types/enum/TaskStatus'
+import {ITaskStorage}   from '../storages/ITaskStorage'
+import {TaskStatus}     from '../types/enum/TaskStatus'
 
 export class TaskService {
 
@@ -16,5 +17,9 @@ export class TaskService {
         createTaskDTO.status   = TaskStatus.PENDING
 
         return this.taskStorage.create(createTaskDTO)
+    }
+
+    async list(listTasksDTO: ListTasksDTO): Promise<Task[]> {
+        return this.taskStorage.list(listTasksDTO)
     }
 }

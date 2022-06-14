@@ -4,8 +4,10 @@
   "description": "Small API for task management",
   "main": "start.ts",
   "scripts": {
+    "build": "tsc",
     "dev": "ts-node-dev --clear --watch --debug --respawn --transpile-only ./start.ts",
-    "test": "mocha -r ts-node/register 'tests/**/*.ts'"
+    "test": "mocha --timeout 60000 -r ts-node/register 'tests/**/*.ts'",
+    "start": "node ./dist/start.js"
   },
   "repository": {
     "type": "git",
@@ -23,7 +25,9 @@
   "dependencies": {
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
-    "http-status-codes": "^2.2.0"
+    "express-validator": "^6.14.1",
+    "http-status-codes": "^2.2.0",
+    "mongoose": "^6.3.8"
   },
   "devDependencies": {
     "@types/chai-as-promised": "^7.1.5",
@@ -34,6 +38,7 @@
     "chai": "^4.3.6",
     "chai-as-promised": "^7.1.1",
     "mocha": "^10.0.0",
+    "mongodb-memory-server": "^8.6.0",
     "supertest": "^6.2.3",
     "ts-node-dev": "^2.0.0",
     "typescript": "^4.7.3"

@@ -1,7 +1,9 @@
 import mongoose          from 'mongoose'
 import {ITaskModel}      from '../mongo-schemas/task'
 import {TASK_MODEL_NAME} from '../mongo-schemas/task'
+import {UpdateStatusDTO} from '../src/dtos/tasks/UpdateStatusDTO'
 import {CreateTaskDTO}   from '../src/dtos/tasks/CreateTaskDTO'
+import {GetByIdDTO}      from '../src/dtos/tasks/GetByIdDTO'
 import {ListTasksDTO}    from '../src/dtos/tasks/ListTasksDTO'
 import {Task}            from '../src/entities/Task'
 import {ITaskStorage}    from '../src/storages/ITaskStorage'
@@ -17,7 +19,28 @@ export class TaskMongoStorage implements ITaskStorage {
     }
 
     public create(createTaskDTO: CreateTaskDTO): Promise<Task> {
-        return this._collection.create(createTaskDTO)
+        return new Promise((resolve, reject) => {
+            this._collection
+                .create(createTaskDTO)
+                .then((response: ITaskModel) => {
+                    const task: Task = response
+                    resolve(task);
+                })
+        })
+    }
+
+    public getById(getByIdDTO: GetByIdDTO): Promise<Task | null> {
+        return new Promise((resolve, reject) => {
+            this._collection
+                .findById(getByIdDTO.id)
+                .then((response: ITaskModel | null) => {
+                    if (null != response) {
+                        const task: Task = response
+                        resolve(task);
+                    }
+                    resolve(null)
+                })
+        })
     }
 
     public list(listTasksDTO: ListTasksDTO): Promise<Task[]> {
@@ -60,6 +83,31 @@ export class TaskMongoStorage implements ITaskStorage {
                     }
 
                     resolve([]);
+                })
+        })
+    }
+
+    public updateStatus(updateStatusDTO: UpdateStatusDTO): Promise<Task | null> {
+        return new Promise((resolve, reject) => {
+            this._collection
+                .findByIdAndUpdate(
+                    updateStatusDTO.id,
+                    {
+                        status: updateStatusDTO.status,
+                        historic: updateStatusDTO.historic,
+                    },
+                    {
+                        new: true,
+                        runValidators: true,
+                        omitUndefined: true,
+                    },
+                )
+                .then((response: ITaskModel | null) => {
+                    if (null != response) {
+                        const task: Task = response
+                        resolve(task);
+                    }
+                    resolve(null)
                 })
         })
     }

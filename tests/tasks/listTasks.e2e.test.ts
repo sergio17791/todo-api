@@ -113,6 +113,8 @@ describe('List Tasks e2e tests', () => {
             chai.expect(tasks[0].historic).to.be.an('array').with.length(1)
             chai.expect(tasks[0].historic[0].status).to.equals(TaskStatus.PENDING)
             chai.expect(tasks[0].historic[0]).to.have.property('date')
+            chai.expect(tasks[0]).to.have.property('created_at')
+            chai.expect(tasks[0]).to.have.property('updated_at')
         })
     })
 
@@ -137,6 +139,8 @@ describe('List Tasks e2e tests', () => {
             chai.expect(tasks[0].historic).to.be.an('array').with.length(1)
             chai.expect(tasks[0].historic[0].status).to.equals(TaskStatus.PENDING)
             chai.expect(tasks[0].historic[0]).to.have.property('date')
+            chai.expect(tasks[0]).to.have.property('created_at')
+            chai.expect(tasks[0]).to.have.property('updated_at')
         })
     })
 
@@ -161,6 +165,8 @@ describe('List Tasks e2e tests', () => {
             chai.expect(tasks[0].historic).to.be.an('array').with.length(1)
             chai.expect(tasks[0].historic[0].status).to.equals(TaskStatus.PENDING)
             chai.expect(tasks[0].historic[0]).to.have.property('date')
+            chai.expect(tasks[0]).to.have.property('created_at')
+            chai.expect(tasks[0]).to.have.property('updated_at')
         })
     })
 
@@ -185,6 +191,8 @@ describe('List Tasks e2e tests', () => {
             chai.expect(tasks[0].historic).to.be.an('array').with.length(1)
             chai.expect(tasks[0].historic[0].status).to.equals(TaskStatus.PENDING)
             chai.expect(tasks[0].historic[0]).to.have.property('date')
+            chai.expect(tasks[0]).to.have.property('created_at')
+            chai.expect(tasks[0]).to.have.property('updated_at')
         })
     })
 
@@ -211,6 +219,8 @@ describe('List Tasks e2e tests', () => {
             chai.expect(tasks[0].historic[0]).to.have.property('date')
             chai.expect(tasks[0].historic[1].status).to.equals(TaskStatus.COMPLETED)
             chai.expect(tasks[0].historic[1]).to.have.property('date')
+            chai.expect(tasks[0]).to.have.property('created_at')
+            chai.expect(tasks[0]).to.have.property('updated_at')
         })
     })
 
@@ -238,6 +248,8 @@ describe('List Tasks e2e tests', () => {
             chai.expect(tasks[0].historic[0]).to.have.property('date')
             chai.expect(tasks[0].historic[1].status).to.equals(TaskStatus.COMPLETED)
             chai.expect(tasks[0].historic[1]).to.have.property('date')
+            chai.expect(tasks[0]).to.have.property('created_at')
+            chai.expect(tasks[0]).to.have.property('updated_at')
         })
     })
 
@@ -259,6 +271,8 @@ describe('List Tasks e2e tests', () => {
             chai.expect(tasks[0].historic).to.be.an('array').with.length(1)
             chai.expect(tasks[0].historic[0].status).to.equals(TaskStatus.PENDING)
             chai.expect(tasks[0].historic[0]).to.have.property('date')
+            chai.expect(tasks[0]).to.have.property('created_at')
+            chai.expect(tasks[0]).to.have.property('updated_at')
             chai.expect(tasks[1]).to.have.property('id')
             chai.expect(tasks[1].name).to.equals('Second task')
             chai.expect(tasks[1].description).to.equals('Second task description')
@@ -270,6 +284,8 @@ describe('List Tasks e2e tests', () => {
             chai.expect(tasks[1].historic[0]).to.have.property('date')
             chai.expect(tasks[1].historic[1].status).to.equals(TaskStatus.COMPLETED)
             chai.expect(tasks[1].historic[1]).to.have.property('date')
+            chai.expect(tasks[1]).to.have.property('created_at')
+            chai.expect(tasks[1]).to.have.property('updated_at')
         })
     })
 

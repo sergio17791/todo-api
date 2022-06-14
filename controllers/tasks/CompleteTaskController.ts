@@ -6,25 +6,17 @@ import {Task}             from '../../src/entities/Task';
 import {TaskService}      from '../../src/services/TaskService';
 import {TaskMongoStorage} from '../../mongo-storages/TaskMongoStorage';
 
-export class CreateTaskController extends BaseController {
+export class CompleteTaskController extends BaseController {
     public async execute(request: Request, response: Response): Promise<Response> {
         this.validateRequest(request)
 
-        const name: string        = request.body.name
-        const description: string = request.body.description
-        const assignee: string    = request.body.assignee
-        const dueDate: Date       = request.body.due_date
+        const id: string = request.params.id
 
         const storage: TaskMongoStorage = new TaskMongoStorage()
 
-        const task: Task = await new TaskService(storage).create({
-            name,
-            description,
-            assignee,
-            dueDate,
-        })
+        const task: Task = await new TaskService(storage).complete({id})
 
-        return response.status(StatusCodes.CREATED).json({
+        return response.status(StatusCodes.OK).json({
             id:          task.id,
             name:        task.name,
             description: task.description,

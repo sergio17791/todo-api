@@ -1,0 +1,24 @@
+version: '3.8'
+services:
+  api:
+    build:
+      context: .
+      args:
+        PORT: ${SERVER_PORT}
+      dockerfile: Dockerfile
+    volumes:
+      - ./:/usr/src/app
+    ports:
+      - "${SERVER_PORT}:${SERVER_PORT}"  
+    links:
+      - mongo  
+    
+  mongo:
+    image: mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb:/data/db
+
+volumes:
+  mongodb:

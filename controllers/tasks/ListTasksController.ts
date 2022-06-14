@@ -38,7 +38,9 @@ export class ListTasksController extends BaseController {
                 assignee:    task.assignee,
                 due_date:    task.dueDate,
                 status:      task.status,
-                historic:    task.historic 
+                historic:    task.historic,
+                created_at:  task.createdAt,
+                updated_at:  task.updatedAt,
             }
         })
 

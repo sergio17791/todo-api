@@ -113,6 +113,8 @@ describe('Create Task e2e tests', () => {
             chai.expect(body.historic).to.be.an('array').with.length(1)
             chai.expect(body.historic[0].status).to.equals(TaskStatus.PENDING)
             chai.expect(body.historic[0]).to.have.property('date')
+            chai.expect(body).to.have.property('created_at')
+            chai.expect(body).to.have.property('updated_at')
         })
     })
 })

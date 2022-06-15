@@ -1,5 +1,5 @@
-import {ITaskHistoric} from './ITaskHistoric'
-import {TaskStatus}    from '../types/enum/TaskStatus'
+import { ITaskHistoric } from './ITaskHistoric'
+import { TaskStatus } from '../types/enum/TaskStatus'
 
 export interface ITask {
     id: string

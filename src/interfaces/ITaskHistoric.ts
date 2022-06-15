@@ -1,4 +1,4 @@
-import {TaskStatus} from '../types/enum/TaskStatus'
+import { TaskStatus } from '../types/enum/TaskStatus'
 
 export interface ITaskHistoric {
     status: TaskStatus

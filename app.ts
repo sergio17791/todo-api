@@ -1,10 +1,10 @@
-import express       from 'express'
-import routes        from './routes'
-import {StatusCodes} from 'http-status-codes'
+import express from 'express'
+import routes from './routes'
+import { StatusCodes } from 'http-status-codes'
 
 const app: express.Express = express()
 
-app.use(express.urlencoded({extended: true}))
+app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 app.use(routes)
 

@@ -1,17 +1,15 @@
-
-import chai          from 'chai'
-import mongoose      from 'mongoose'
-import request       from 'supertest'
-import {StatusCodes} from 'http-status-codes'
-import app           from '../../app'
-import {TaskStatus}  from '../../src/types/enum/TaskStatus'
+import chai from 'chai'
+import mongoose from 'mongoose'
+import request from 'supertest'
+import { StatusCodes } from 'http-status-codes'
+import app from '../../app'
+import { TaskStatus } from '../../src/types/enum/TaskStatus'
 
 describe('Create Task e2e tests', () => {
-
-    const name: string        = 'Task Name'
+    const name: string = 'Task Name'
     const description: string = 'Task Description'
-    const assignee: string    = 'Task Assignee'
-    const dueDate: Date       = new Date() 
+    const assignee: string = 'Task Assignee'
+    const dueDate: Date = new Date()
 
     context('when name parameter is missing', () => {
         it('should return an error', async () => {
@@ -20,7 +18,7 @@ describe('Create Task e2e tests', () => {
                 .send({
                     description,
                     assignee,
-                    due_date: dueDate
+                    due_date: dueDate,
                 })
                 .expect(StatusCodes.BAD_REQUEST)
 
@@ -38,7 +36,7 @@ describe('Create Task e2e tests', () => {
                 .send({
                     name,
                     assignee,
-                    due_date: dueDate
+                    due_date: dueDate,
                 })
                 .expect(StatusCodes.BAD_REQUEST)
 
@@ -56,7 +54,7 @@ describe('Create Task e2e tests', () => {
                 .send({
                     name,
                     description,
-                    due_date: dueDate
+                    due_date: dueDate,
                 })
                 .expect(StatusCodes.BAD_REQUEST)
 
@@ -86,7 +84,6 @@ describe('Create Task e2e tests', () => {
     })
 
     context('when all parameters are correct', () => {
-
         afterEach(async () => {
             await mongoose.model('Task').deleteMany()
         })
@@ -98,7 +95,7 @@ describe('Create Task e2e tests', () => {
                     name,
                     description,
                     assignee,
-                    due_date: dueDate
+                    due_date: dueDate,
                 })
                 .expect(StatusCodes.CREATED)
 

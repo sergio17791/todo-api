@@ -1,14 +1,12 @@
-
-import chai          from 'chai'
-import mongoose      from 'mongoose'
-import request       from 'supertest'
-import {StatusCodes} from 'http-status-codes'
-import app           from '../../app'
-import {TaskStatus}  from '../../src/types/enum/TaskStatus'
+import chai from 'chai'
+import mongoose from 'mongoose'
+import request from 'supertest'
+import { StatusCodes } from 'http-status-codes'
+import app from '../../app'
+import { TaskStatus } from '../../src/types/enum/TaskStatus'
 
 describe('Complete Task e2e tests', () => {
-
-    const pendingTaskId: mongoose.Types.ObjectId   = new mongoose.Types.ObjectId()
+    const pendingTaskId: mongoose.Types.ObjectId = new mongoose.Types.ObjectId()
     const completedTaskId: mongoose.Types.ObjectId = new mongoose.Types.ObjectId()
 
     beforeEach(async () => {
@@ -19,10 +17,12 @@ describe('Complete Task e2e tests', () => {
             assignee: 'Pending task assignee',
             dueDate: new Date('2022-06-13T17:00:00.000Z'),
             status: TaskStatus.PENDING,
-            historic: [{
-                status: TaskStatus.PENDING,
-                date: new Date()
-            }]
+            historic: [
+                {
+                    status: TaskStatus.PENDING,
+                    date: new Date(),
+                },
+            ],
         })
 
         await mongoose.model('Task').create({
@@ -35,13 +35,13 @@ describe('Complete Task e2e tests', () => {
             historic: [
                 {
                     status: TaskStatus.PENDING,
-                    date: new Date()
+                    date: new Date(),
                 },
                 {
                     status: TaskStatus.COMPLETED,
-                    date: new Date()
-                }
-            ]
+                    date: new Date(),
+                },
+            ],
         })
     })
 
@@ -51,9 +51,7 @@ describe('Complete Task e2e tests', () => {
 
     context('when id parameter is invalid', () => {
         it('should return an error', async () => {
-            const response = await request(app)
-                .put('/task/XXXX/complete')
-                .expect(StatusCodes.BAD_REQUEST)
+            const response = await request(app).put('/task/XXXX/complete').expect(StatusCodes.BAD_REQUEST)
 
             const body = response.body
 
@@ -81,9 +79,7 @@ describe('Complete Task e2e tests', () => {
         it('should return an error', async () => {
             const notExistentTaskId: mongoose.Types.ObjectId = new mongoose.Types.ObjectId()
 
-            const response = await request(app)
-                .put(`/task/${completedTaskId}/complete`)
-                .expect(StatusCodes.BAD_REQUEST)
+            const response = await request(app).put(`/task/${completedTaskId}/complete`).expect(StatusCodes.BAD_REQUEST)
 
             const body = response.body
 
@@ -96,9 +92,7 @@ describe('Complete Task e2e tests', () => {
         it('should return a completed task', async () => {
             const notExistentTaskId: mongoose.Types.ObjectId = new mongoose.Types.ObjectId()
 
-            const response = await request(app)
-                .put(`/task/${pendingTaskId}/complete`)
-                .expect(StatusCodes.OK)
+            const response = await request(app).put(`/task/${pendingTaskId}/complete`).expect(StatusCodes.OK)
 
             const body = response.body
 

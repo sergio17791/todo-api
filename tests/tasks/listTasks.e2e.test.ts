@@ -1,13 +1,11 @@
-
-import chai          from 'chai'
-import mongoose      from 'mongoose'
-import request       from 'supertest'
-import {StatusCodes} from 'http-status-codes'
-import app           from '../../app'
-import {TaskStatus}  from '../../src/types/enum/TaskStatus'
+import chai from 'chai'
+import mongoose from 'mongoose'
+import request from 'supertest'
+import { StatusCodes } from 'http-status-codes'
+import app from '../../app'
+import { TaskStatus } from '../../src/types/enum/TaskStatus'
 
 describe('List Tasks e2e tests', () => {
-
     beforeEach(async () => {
         await mongoose.model('Task').create({
             name: 'First task',
@@ -15,10 +13,12 @@ describe('List Tasks e2e tests', () => {
             assignee: 'First task assignee',
             dueDate: new Date('2022-06-13T17:00:00.000Z'),
             status: TaskStatus.PENDING,
-            historic: [{
-                status: TaskStatus.PENDING,
-                date: new Date()
-            }]
+            historic: [
+                {
+                    status: TaskStatus.PENDING,
+                    date: new Date(),
+                },
+            ],
         })
 
         await mongoose.model('Task').create({
@@ -30,13 +30,13 @@ describe('List Tasks e2e tests', () => {
             historic: [
                 {
                     status: TaskStatus.PENDING,
-                    date: new Date()
+                    date: new Date(),
                 },
                 {
                     status: TaskStatus.COMPLETED,
-                    date: new Date()
-                }
-            ]
+                    date: new Date(),
+                },
+            ],
         })
     })
 
@@ -49,7 +49,7 @@ describe('List Tasks e2e tests', () => {
             const response = await request(app)
                 .get('/tasks')
                 .query({
-                    to_due_date: 'Wrong date'
+                    to_due_date: 'Wrong date',
                 })
                 .expect(StatusCodes.BAD_REQUEST)
 
@@ -65,7 +65,7 @@ describe('List Tasks e2e tests', () => {
             const response = await request(app)
                 .get('/tasks')
                 .query({
-                    from_due_date: 'Wrong date'
+                    from_due_date: 'Wrong date',
                 })
                 .expect(StatusCodes.BAD_REQUEST)
 
@@ -81,7 +81,7 @@ describe('List Tasks e2e tests', () => {
             const response = await request(app)
                 .get('/tasks')
                 .query({
-                    status: 'INVALID'
+                    status: 'INVALID',
                 })
                 .expect(StatusCodes.BAD_REQUEST)
 
@@ -97,7 +97,7 @@ describe('List Tasks e2e tests', () => {
             const response = await request(app)
                 .get('/tasks')
                 .query({
-                    name: 'First task'
+                    name: 'First task',
                 })
                 .expect(StatusCodes.OK)
 
@@ -123,7 +123,7 @@ describe('List Tasks e2e tests', () => {
             const response = await request(app)
                 .get('/tasks')
                 .query({
-                    assignee: 'First task assignee'
+                    assignee: 'First task assignee',
                 })
                 .expect(StatusCodes.OK)
 
@@ -149,7 +149,7 @@ describe('List Tasks e2e tests', () => {
             const response = await request(app)
                 .get('/tasks')
                 .query({
-                    status: TaskStatus.PENDING
+                    status: TaskStatus.PENDING,
                 })
                 .expect(StatusCodes.OK)
 
@@ -175,7 +175,7 @@ describe('List Tasks e2e tests', () => {
             const response = await request(app)
                 .get('/tasks')
                 .query({
-                    to_due_date: '2022-06-13T17:30:00.000Z'
+                    to_due_date: '2022-06-13T17:30:00.000Z',
                 })
                 .expect(StatusCodes.OK)
 
@@ -201,7 +201,7 @@ describe('List Tasks e2e tests', () => {
             const response = await request(app)
                 .get('/tasks')
                 .query({
-                    from_due_date: '2022-06-13T17:30:00.000Z'
+                    from_due_date: '2022-06-13T17:30:00.000Z',
                 })
                 .expect(StatusCodes.OK)
 
@@ -230,7 +230,7 @@ describe('List Tasks e2e tests', () => {
                 .get('/tasks')
                 .query({
                     from_due_date: '2022-06-13T17:30:00.000Z',
-                    to_due_date:   '2022-06-15T17:30:00.000Z'
+                    to_due_date: '2022-06-15T17:30:00.000Z',
                 })
                 .expect(StatusCodes.OK)
 
@@ -255,9 +255,7 @@ describe('List Tasks e2e tests', () => {
 
     context('when no filter parameters', () => {
         it('should return a list', async () => {
-            const response = await request(app)
-                .get('/tasks')
-                .expect(StatusCodes.OK)
+            const response = await request(app).get('/tasks').expect(StatusCodes.OK)
 
             const tasks = response.body
             chai.expect(tasks).to.be.an('array').with.length(2)
@@ -295,7 +293,7 @@ describe('List Tasks e2e tests', () => {
                 .get('/tasks')
                 .query({
                     from_due_date: '2022-06-13T18:00:00.000Z',
-                    to_due_date:   '2022-06-14T16:00:00.000Z'
+                    to_due_date: '2022-06-14T16:00:00.000Z',
                 })
                 .expect(StatusCodes.OK)
 

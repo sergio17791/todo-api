@@ -1,5 +1,5 @@
 import { TaskHistoric } from '../../entities/TaskHistoric'
-import {TaskStatus} from '../../types/enum/TaskStatus'
+import { TaskStatus } from '../../types/enum/TaskStatus'
 
 export class CreateTaskDTO {
     constructor(

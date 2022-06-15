@@ -1,7 +1,7 @@
-import {IController}       from './IController'
-import {Request, Response} from 'express'
-import {validationResult}  from 'express-validator'
-import {ToDoAPIError}      from '../src/errors/ToDoAPIError'
+import { IController } from './IController'
+import { Request, Response } from 'express'
+import { validationResult } from 'express-validator'
+import { ToDoAPIError } from '../src/errors/ToDoAPIError'
 
 export abstract class BaseController implements IController {
     abstract execute(request: Request, response: Response): Promise<Response>

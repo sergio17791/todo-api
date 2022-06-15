@@ -1,8 +1,7 @@
-
-import chai                from 'chai'
-import chaiAsPromised      from 'chai-as-promised'
-import mongoose            from 'mongoose'
-import {MongoMemoryServer} from 'mongodb-memory-server'
+import chai from 'chai'
+import chaiAsPromised from 'chai-as-promised'
+import mongoose from 'mongoose'
+import { MongoMemoryServer } from 'mongodb-memory-server'
 
 chai.use(chaiAsPromised)
 

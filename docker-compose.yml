@@ -1,0 +1,34 @@
+version: '3.8'
+services:  
+  api:
+    container_name: todo-api
+    build:
+      context: .
+      args:
+        PORT: ${SERVER_PORT}
+      dockerfile: Dockerfile
+    volumes:
+      - ./:/usr/src/app
+    ports:
+      - "${SERVER_PORT}:${SERVER_PORT}"  
+    depends_on:
+      - mongo
+    networks:
+      - todo-network
+
+  mongo:
+    container_name: todo-api-mongo
+    image: mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb:/data/db
+    networks:
+      - todo-network
+
+volumes:
+  mongodb:
+
+networks:
+  todo-network:
+    driver: bridge
